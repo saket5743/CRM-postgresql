@@ -14,7 +14,11 @@ app.use(express.json());
 // app.use("/api/auth", authRoutes);
 // app.use("/api/customers", customerRoutes);
 
-console.log(`This is my crm project`)
+
+app.get("/", (req, res) => {
+  res.send("VERSION 1 FROM DOCKER");
+});
+
 
 app.listen(process.env.PORT, () => {
   console.log(`CRM API running on port ${process.env.PORT}`);

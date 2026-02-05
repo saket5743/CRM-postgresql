@@ -10,24 +10,27 @@ services:
       - "5000:5000"
     env_file:
       - .env
-    volumes:
-      - .:/app
-      - /app/node_modules
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    restart: "no"
 
   db:
     image: postgres:15
     container_name: crm_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: root
       POSTGRES_DB: crm_db
     ports:
       - "5432:5432"
     volumes:
       - crm_data:/var/lib/postgresql/data
-      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   crm_data:
