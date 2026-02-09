@@ -1,23 +1,17 @@
 import express from "express";
 import cors from "cors";
 import dotenv from 'dotenv';
+import configMiddleware from "./middleware/configMiddleware.js";
+import myRoutes from './routes/index.js';
 dotenv.config();
-
-// const authRoutes = require("./routes/auth.routes");
-// const customerRoutes = require("./routes/customer.routes");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// app.use("/api/auth", authRoutes);
-// app.use("/api/customers", customerRoutes);
 
-
-app.get("/", (req, res) => {
-  res.send("VERSION 1 FROM DOCKER");
-});
+app.use("/api/v1", configMiddleware, myRoutes);
 
 
 app.listen(process.env.PORT, () => {
