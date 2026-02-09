@@ -1,5 +1,5 @@
 const fieldObj = {
-  "/api/v1/signUp": {
+  "/api/v1/user/signUp": {
     validatorKeys: {
       name: "string",
       company_name: "string",
@@ -9,14 +9,13 @@ const fieldObj = {
     }
   },
 
-  // "/customerCompany/customer-company/insertCustomerCompanyRecordDetails": {
-  //   validatorKeys: {
-  //     user_id: "isValidGUID",
-  //     user_company_id: "isValidGUID",
-  //     customer_company_name: "string",
-  //     contact: "contact"
-  //   }
-  // },
+  "/api/v1/user/login": {
+    validatorKeys: {
+      email: "email",
+      password: "password",
+      contact_no: "contact"
+    }
+  },
 
   // "/common/user/updateUserDetails": {
   //   validatorKeys: {
